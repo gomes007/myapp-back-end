@@ -36,9 +36,10 @@ public class Usuario {
 
 	private String senha;
 	
-	
+	/*
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "usuario")
 	private List<Lancamento> lancamento = new ArrayList<>();
+	*/
 
 }
 

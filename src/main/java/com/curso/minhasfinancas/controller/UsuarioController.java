@@ -1,9 +1,13 @@
 package com.curso.minhasfinancas.controller;
 
+import java.math.BigDecimal;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +18,7 @@ import com.curso.minhasfinancas.dto.UsuarioDTO;
 import com.curso.minhasfinancas.exception.ErroAutenticacao;
 import com.curso.minhasfinancas.exception.RegraNegocioException;
 import com.curso.minhasfinancas.model.entity.Usuario;
+import com.curso.minhasfinancas.service.LancamentoService;
 import com.curso.minhasfinancas.service.UsuarioService;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
@@ -25,6 +30,10 @@ public class UsuarioController {
 
 	@Autowired
 	private UsuarioService service;
+	
+	@Autowired
+	private LancamentoService lancamentoService;
+	
 	
 
 		
@@ -67,6 +76,17 @@ public class UsuarioController {
 		}).orElseGet(() -> new ResponseEntity("usuario nao encontrado na base", HttpStatus.BAD_REQUEST));						
 	}
 	
+	
+	@GetMapping("{id}/saldo")
+	public ResponseEntity obterSaldo(@PathVariable("id") Long id) {
+		Optional<Usuario> usuario = service.obterPorId(id);
+		if (!usuario.isPresent()) {
+			return new ResponseEntity(HttpStatus.NOT_FOUND);
+		}
+		
+		BigDecimal saldo = lancamentoService.obterSaldoPorUsuario(id);
+			return ResponseEntity.ok(saldo);
+	}
 	
 	
 	

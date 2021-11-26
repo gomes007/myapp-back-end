@@ -62,7 +62,7 @@ public class LancamentoServiceImpl implements LancamentoService {
 	@Override
 	public void validar(Lancamento lancamento) {
 		if (lancamento.getDescricao() == null || lancamento.getDescricao().trim().equals("")) {
-			throw new RegraNegocioException("informe uam descricao valida");
+			throw new RegraNegocioException("informe uma descricao valida");
 		}
 
 		if (lancamento.getMes() == null || lancamento.getMes() < 1 || lancamento.getMes() > 12) {

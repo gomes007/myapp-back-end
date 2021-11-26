@@ -130,7 +130,7 @@ public class LancamentoController {
 	
 	
 	
-	//para salvar pega da entidade dto e joga na entidade lancamento 
+	
 	private Lancamento converter(LancamentoDTO dto) {
 		Lancamento lancamento = new Lancamento();
 		lancamento.setId(dto.getId());
@@ -156,19 +156,6 @@ public class LancamentoController {
 	
 	
 	
-	//para atualizar pega da entidade lancamento e joga no DTO  
-	private LancamentoDTO converter(Lancamento lancamento) {
-		return LancamentoDTO.builder()
-									  .id(lancamento.getId())
-									  .descricao(lancamento.getDescricao())
-									  .ano(lancamento.getAno())
-									  .mes(lancamento.getMes())
-									  .valor(lancamento.getValor())
-									  .status(lancamento.getStatus().name())
-									  .tipo(lancamento.getTipo().name())
-									  .usuario(lancamento.getUsuario().getId())
-									  .build();						  																	  
-	}
 	
 	
 	
